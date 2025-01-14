@@ -1,5 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import CardComponet from "./component/CardComponent";
+import SerchComponent from "./component/SerchComponent";
 
 
 function App() {
@@ -16,30 +18,30 @@ function App() {
     }}
     ).then((resp) => {
       const newArray = resp.data.results;
-      console.log("arrayFilms", arrayFilms)
+      setArrayFilms(newArray)
     })
   }
 
-  useEffect(() => {
-    getMovie()
-  }, [])
+  const resetAll = () => {
+    setArrayFilms([]);
+    setImputValue("")
+  }
+
+ 
 
   return (
     <>
       <section>
         <input type="text" value={imputValue} onChange={(event) => { setImputValue(event.target.value) }} />
         <button onClick={() => getMovie()}>cerca</button>
-        <button onClick={() => setArrayFilms([])}>rest</button>
+        <button onClick={() => resetAll()}>rest</button>
       </section>
       <section>
         {
           arrayFilms.map((curFilm, index) => {
             return(
               <div key={index}>
-                <h3>{curFilm.title}</h3>
-                <h4>{curFilm.original_language}</h4>
-                <span>{curFilm.original_language}</span>
-                <span>{curFilm.vote_count}</span>
+                <CardComponet element={curFilm} />
               </div>
             )
           })
