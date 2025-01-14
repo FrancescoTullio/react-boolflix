@@ -16,10 +16,7 @@ function App() {
     }}
     ).then((resp) => {
       const newArray = resp.data.results;
-      console.log("newArray", newArray)
-      setArrayFilms(newArray);
       console.log("arrayFilms", arrayFilms)
-
     })
   }
 
@@ -32,6 +29,7 @@ function App() {
       <section>
         <input type="text" value={imputValue} onChange={(event) => { setImputValue(event.target.value) }} />
         <button onClick={() => getMovie()}>cerca</button>
+        <button onClick={() => setArrayFilms([])}>rest</button>
       </section>
       <section>
         {
