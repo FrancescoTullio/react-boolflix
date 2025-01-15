@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import CardComponent from "./component/CardComponent";
+import SerchComponent from "./component/SerchComponent";
 
 
 function App() {
@@ -19,9 +20,7 @@ function App() {
         query: imputValue
       }
     }
-    ).then((resp) => {
-      console.log(resp.data.results);
-      
+    ).then((resp) => {      
       const newArray = resp.data.results;
       setArrayFilms(newArray)
     })
@@ -54,13 +53,7 @@ function App() {
 
   return (
     <>
-      <header className="row justy-content-conter al-items">
-        <section>
-          <input type="text" value={imputValue} onChange={(event) => { setImputValue(event.target.value) }} />
-          <button onClick={() => getAll()} className="ml-15">cerca</button>
-          <button onClick={() => resetAll()} className="ml-5">rest</button>
-        </section>
-      </header>
+    <SerchComponent imputValue={imputValue} setImputValue={setImputValue} getAll={getAll} resetAll={resetAll}/>
       <main>
         <section>
           <div className="container">
